@@ -1,0 +1,104 @@
+parameters:
+    markup_addressing.twig.delimiter.template_name: '#'
+
+services:
+    markup_addressing.country_name.provider:
+        class: Markup\Addressing\Provider\CountryNameProvider
+        arguments:
+            - %locale%
+    markup_addressing.country_name.extension:
+        class: Markup\Addressing\Twig\Extension\CountryNameExtension
+        arguments:
+            - @markup_addressing.country_name.provider
+        tags:
+            - { name: twig.extension }
+    markup_addressing.address.node.provider.schemadotorghtml:
+        class: Markup\Addressing\Twig\Node\SchemaDotOrgAdrHtmlNodeProvider
+        tags:
+            - { name: markup_addressing.address_node_provider, alias: html }
+    markup_addressing.address.node.provider.plaintext:
+        class: Markup\Addressing\Twig\Node\PlainTextNodeProvider
+        tags:
+            - { name: markup_addressing.address_node_provider, alias: plaintext }
+    markup_addressing.address.node.provider.comma_separated:
+        class: Markup\Addressing\Twig\Node\CommaSeparatedNodeProvider
+        tags:
+            - { name: markup_addressing.address_node_provider, alias: comma_separated }
+    markup_addressing.address.factory.node.provider:
+        class: Markup\Addressing\Twig\Node\ProviderFactory
+    markup_addressing.address.extension.internal.html:
+        class: Markup\Addressing\Twig\Extension\InternalAddressExtension
+        arguments:
+            - @markup_addressing.address.factory.node.provider
+            - html
+        tags:
+            - { name: markup_addressing.address_format_extension, alias: html }
+    markup_addressing.address.extension.internal.plaintext:
+        class: Markup\Addressing\Twig\Extension\InternalAddressExtension
+        arguments:
+            - @markup_addressing.address.factory.node.provider
+            - plaintext
+        tags:
+            - { name: markup_addressing.address_format_extension, alias: plaintext }
+    markup_addressing.address.extension.internal.comma_separated:
+        class: Markup\Addressing\Twig\Extension\InternalAddressExtension
+        arguments:
+            - @markup_addressing.address.factory.node.provider
+            - comma_separated
+        tags:
+            - { name: markup_addressing.address_format_extension, alias: comma_separated }
+    markup_addressing.provider.address.extension.internal:
+        class: Markup\Addressing\Twig\Extension\InternalExtensionProvider
+    markup_addressing.twig.loader:
+        class: Markup\Addressing\Twig\Loader\TemplateLoader
+        arguments:
+            - %markup_addressing.twig.delimiter.template_name%
+    markup_addressing.twig.internal:
+        class: Twig_Environment
+        arguments:
+            - @markup_addressing.twig.loader
+            - %markup_addressing.twig.options.internal%
+        calls:
+            - [ addExtension, [ @markup_addressing.country_name.extension ] ]
+        scope: prototype
+    markup_addressing.twig.provider:
+        class: Markup\Addressing\Provider\KeyedEnvironmentServiceProvider
+        arguments:
+            - @markup_addressing.twig.internal.closure
+    markup_addressing.twig.internal.closure:
+        class: Markup\AddressingBundle\DependencyInjection\ServiceClosure
+        arguments:
+            - markup_addressing.twig.internal
+            - @service_container
+    markup_addressing.address.template.provider:
+        class: Markup\Addressing\Provider\IntlAddressTemplateProvider
+        arguments:
+            - @markup_addressing.provider.address.extension.internal
+            - %markup_addressing.twig.delimiter.template_name%
+    markup_addressing.address.renderer:
+        class: Markup\Addressing\Renderer\AddressRenderer
+        arguments:
+            - @markup_addressing.twig.provider
+            - @markup_addressing.address.template.provider
+    markup_addressing.address.extension.public:
+        class: Markup\Addressing\Twig\Extension\AddressExtension
+        arguments:
+            - @markup_addressing.address.renderer
+        tags:
+            - { name: twig.extension }
+    markup_addressing.canonicalizer.postal_code:
+        class: Markup\AddressingBundle\Canonicalizer\PostalCodeCanonicalizer
+    markup_addressing.validator.postal_code:
+        class: Markup\AddressingBundle\Validator\PostalCodeValidator
+        arguments:
+            - @markup_addressing.validator.postal_code.provider
+        tags:
+            - { name: validator.constraint_validator, alias: postal_code }
+    markup_addressing.validator.postal_code.regex:
+        class: Markup\AddressingBundle\Validator\RegexPostalCodeValidator
+        tags:
+            - { name: validator.constraint_validator, alias: regex_postal_code }
+    markup_addressing.validator.postal_code.provider:
+        class: Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider
+        arguments:
+            - @validator.validator_factory
