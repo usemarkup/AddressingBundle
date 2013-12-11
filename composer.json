@@ -19,7 +19,9 @@
         "symfony/framework-bundle": "~2.3"
     },
     "require-dev": {
-        "symfony/validator": "~2.3"
+        "symfony/validator": "~2.3",
+        "phpunit/phpunit": "3.7.*",
+        "mockery/mockery": "~0.8.0"
     },
     "suggests": {
         "symfony/validator": "~2.3"
