@@ -87,7 +87,7 @@ services:
         tags:
             - { name: twig.extension }
     markup_addressing.canonicalizer.postal_code:
-        class: Markup\AddressingBundle\Canonicalizer\PostalCodeCanonicalizer
+        class: Markup\Addressing\Canonicalizer\PostalCodeCanonicalizer
     markup_addressing.validator.postal_code:
         class: Markup\AddressingBundle\Validator\PostalCodeValidator
         arguments:
