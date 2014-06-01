@@ -2,6 +2,7 @@
 
 namespace Markup\AddressingBundle\Tests\Validator;
 
+use Markup\AddressingBundle\Validator\PostalCodeConstraint;
 use Markup\AddressingBundle\Validator\RegexPostalCodeValidator;
 
 /**
@@ -23,9 +24,8 @@ class RegexPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testValidateInitializesAndDelegatesOnValidators()
     {
-        $constraint = $this->getMockBuilder('Symfony\Component\Validator\Constraint')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $constraint = new PostalCodeConstraint();
+        $constraint->message = 'message';
         $context = $this->getMock('Symfony\Component\Validator\ExecutionContextInterface');
         $value = 'i am a value';
         $this->regexValidator
@@ -35,7 +35,7 @@ class RegexPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
         $this->regexValidator
             ->expects($this->at(1))
             ->method('validate')
-            ->with($this->equalTo($value), $this->equalTo($constraint));
+            ->with($this->equalTo($value), $this->isInstanceOf('Symfony\Component\Validator\Constraint'));
         $this->notBlankValidator
             ->expects($this->at(0))
             ->method('initialize')
@@ -43,7 +43,7 @@ class RegexPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
         $this->notBlankValidator
             ->expects($this->at(1))
             ->method('validate')
-            ->with($this->equalTo($value), $this->equalTo($constraint));
+            ->with($this->equalTo($value), $this->isInstanceOf('Symfony\Component\Validator\Constraint'));
         $this->validator->initialize($context);
         $this->validator->validate($value, $constraint);
     }
