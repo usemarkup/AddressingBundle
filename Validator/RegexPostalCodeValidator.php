@@ -3,6 +3,7 @@
 namespace Markup\AddressingBundle\Validator;
 
 use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Constraints\NotBlankValidator;
@@ -48,7 +49,9 @@ class RegexPostalCodeValidator extends ConstraintValidator
     {
         $this->regexValidator->initialize($this->context);
         $this->regexValidator->validate($value, $constraint);
+        $notBlankConstraint = new NotBlank();
+        $notBlankConstraint->message = $constraint->message;
         $this->notBlankValidator->initialize($this->context);
-        $this->notBlankValidator->validate($value, $constraint);
+        $this->notBlankValidator->validate($value, $notBlankConstraint);
     }
 }
