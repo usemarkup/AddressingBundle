@@ -55,6 +55,14 @@ class LocalizedPostalCodeValidatorClosureProvider
                 return $this->createValidatorClosureForConstraint($constraint);
                 break;
 
+            case 'DK':
+                return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(4));
+                break;
+
+            case 'FI':
+                return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5));
+                break;
+
             default:
                 return null;
                 break;
@@ -76,5 +84,17 @@ class LocalizedPostalCodeValidatorClosureProvider
             $validator->initialize($executionContext);
             $validator->validate($value, $constraint);
         };
+    }
+
+    /**
+     * @param int $length
+     * @return FixedLengthDigitPostalCodeConstraint
+     */
+    private function getFixedLengthDigitConstraint($length)
+    {
+        $constraint = new FixedLengthDigitPostalCodeConstraint();
+        $constraint->length = intval($length);
+
+        return $constraint;
     }
 }
