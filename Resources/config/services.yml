@@ -5,6 +5,10 @@ services:
     markup_addressing.country_name.provider:
         class: Markup\Addressing\Provider\CountryNameProvider
         arguments:
+            - @markup_addressing.locale_provider
+    markup_addressing.locale_provider.default:
+        class: Markup\Addressing\Provider\LocaleProvider
+        arguments:
             - %locale%
     markup_addressing.country_name.extension:
         class: Markup\Addressing\Twig\Extension\CountryNameExtension

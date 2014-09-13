@@ -22,7 +22,18 @@ class MarkupAddressingExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $this->loadLocaleProvider($config, $container);
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    private function loadLocaleProvider(array $config, ContainerBuilder $container)
+    {
+        $container->setAlias('markup_addressing.locale_provider', $config['locale_provider']);
     }
 }
