@@ -65,6 +65,10 @@ class LocalizedPostalCodeValidatorClosureProvider
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5));
                 break;
 
+            case 'PT':
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^\d{4}$/', '/^\d{4}\-\d{3}$/']));
+                break;
+
             default:
                 return null;
                 break;
@@ -96,6 +100,18 @@ class LocalizedPostalCodeValidatorClosureProvider
     {
         $constraint = new FixedLengthDigitPostalCodeConstraint();
         $constraint->length = intval($length);
+
+        return $constraint;
+    }
+
+    /**
+     * @param array $regexes
+     * @return MultipleRegexConstraint
+     */
+    private function getMultipleRegexConstraint(array $regexes)
+    {
+        $constraint = new MultipleRegexConstraint();
+        $constraint->patterns = $regexes;
 
         return $constraint;
     }
