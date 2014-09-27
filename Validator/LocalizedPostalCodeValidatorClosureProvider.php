@@ -59,7 +59,9 @@ class LocalizedPostalCodeValidatorClosureProvider
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(4));
                 break;
 
+            case 'ES':
             case 'FI':
+            case 'IT':
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5));
                 break;
 
