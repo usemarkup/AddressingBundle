@@ -111,3 +111,7 @@ services:
         class: Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeValidator
         tags:
             - { name: validator.constraint_validator, alias: fixed_length_digit_postal_code }
+    markup_addressing.validator.multiple_regex:
+        class: Markup\AddressingBundle\Validator\MultipleRegexValidator
+        tags:
+            - { name: validator.constraint_validator, alias: multiple_regex }
