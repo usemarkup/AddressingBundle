@@ -66,7 +66,7 @@ class LocalizedPostalCodeValidatorClosureProvider
                 break;
 
             case 'PT':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^\d{4}$/', '/^\d{4}\-\d{3}$/']));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}$/', '/^\d{4}\-\d{3}$/')));
                 break;
 
             default:

@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraint;
 class MultipleRegexConstraint extends Constraint
 {
     public $message = 'This postal code does not have one of the allowed formats.';
-    public $patterns = [];
+    public $patterns = array();
 
     public function validatedBy()
     {
