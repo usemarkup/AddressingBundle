@@ -56,17 +56,17 @@ class LocalizedPostalCodeValidatorClosureProvider
                 break;
 
             case 'DK':
-                return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(4));
+                return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(4, $message));
                 break;
 
             case 'ES':
             case 'FI':
             case 'IT':
-                return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5));
+                return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5, $message));
                 break;
 
             case 'PT':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}$/', '/^\d{4}\-\d{3}$/')));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}$/', '/^\d{4}\-\d{3}$/'), $message));
                 break;
 
             default:
@@ -94,11 +94,15 @@ class LocalizedPostalCodeValidatorClosureProvider
 
     /**
      * @param int $length
+     * @param string $message
      * @return FixedLengthDigitPostalCodeConstraint
      */
-    private function getFixedLengthDigitConstraint($length)
+    private function getFixedLengthDigitConstraint($length, $message = null)
     {
         $constraint = new FixedLengthDigitPostalCodeConstraint();
+        if (null !== $message) {
+            $constraint->message = $message;
+        }
         $constraint->length = intval($length);
 
         return $constraint;
@@ -106,11 +110,15 @@ class LocalizedPostalCodeValidatorClosureProvider
 
     /**
      * @param array $regexes
+     * @param string $message
      * @return MultipleRegexConstraint
      */
-    private function getMultipleRegexConstraint(array $regexes)
+    private function getMultipleRegexConstraint(array $regexes, $message = null)
     {
         $constraint = new MultipleRegexConstraint();
+        if (null !== $message) {
+            $constraint->message = $message;
+        }
         $constraint->patterns = $regexes;
 
         return $constraint;
