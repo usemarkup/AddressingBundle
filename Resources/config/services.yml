@@ -107,6 +107,7 @@ services:
         class: Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider
         arguments:
             - @validator.validator_factory
+            - @markup_addressing.country_regex_override_provider
     markup_addressing.validator.fixed_length_digit:
         class: Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeValidator
         tags:
@@ -115,3 +116,5 @@ services:
         class: Markup\AddressingBundle\Validator\MultipleRegexValidator
         tags:
             - { name: validator.constraint_validator, alias: multiple_regex }
+    markup_addressing.country_regex_override_provider:
+        class: Markup\AddressingBundle\Validator\CountryRegexOverrideProvider

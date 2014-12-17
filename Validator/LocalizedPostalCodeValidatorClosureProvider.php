@@ -16,11 +16,18 @@ class LocalizedPostalCodeValidatorClosureProvider
     private $validatorFactory;
 
     /**
+     * @var CountryRegexOverrideProvider
+     */
+    private $countryRegexOverrideProvider;
+
+    /**
      * @param ConstraintValidatorFactoryInterface $validatorFactory
+     * @param CountryRegexOverrideProvider        $countryRegexForOverrideProvider
      **/
-    public function __construct(ConstraintValidatorFactoryInterface $validatorFactory)
+    public function __construct(ConstraintValidatorFactoryInterface $validatorFactory, CountryRegexOverrideProvider $countryRegexOverrideProvider)
     {
         $this->validatorFactory = $validatorFactory;
+        $this->countryRegexOverrideProvider = $countryRegexOverrideProvider;
     }
 
     /**
@@ -33,6 +40,17 @@ class LocalizedPostalCodeValidatorClosureProvider
      **/
     public function fetchValidatorForCountry($country, $message = null)
     {
+        //first, check if there is a regex override for the country
+        $override = $this->countryRegexOverrideProvider->getOverrideFor($country);
+        if ($override) {
+            if (!is_array($override)) {
+                $override = array($override);
+            }
+
+            return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint($override), $message);
+        }
+
+        //otherwise just match against country
         switch ($country) {
             case 'GB':
             case 'IM':

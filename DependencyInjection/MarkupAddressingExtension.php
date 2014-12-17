@@ -26,6 +26,8 @@ class MarkupAddressingExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $this->loadCountryPostalCodeOverrides($config, $container);
     }
 
     /**
@@ -35,5 +37,18 @@ class MarkupAddressingExtension extends Extension
     private function loadLocaleProvider(array $config, ContainerBuilder $container)
     {
         $container->setAlias('markup_addressing.locale_provider', $config['locale_provider']);
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    private function loadCountryPostalCodeOverrides(array $config, ContainerBuilder $container)
+    {
+        if (!isset($config['country_postal_code_regex_overrides']) || !$config['country_postal_code_regex_overrides']) {
+            return;
+        }
+        $overridesProvider = $container->getDefinition('markup_addressing.country_regex_override_provider');
+        $overridesProvider->addMethodCall('setOverrideRegexes', array($config['country_postal_code_regex_overrides']));
     }
 }

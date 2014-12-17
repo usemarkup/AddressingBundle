@@ -26,6 +26,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('locale_provider')
                     ->defaultValue('markup_addressing.locale_provider.default')
                 ->end()
+                ->arrayNode('country_postal_code_regex_overrides')
+                    ->prototype('variable')
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;
