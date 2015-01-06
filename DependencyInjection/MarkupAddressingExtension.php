@@ -23,6 +23,7 @@ class MarkupAddressingExtension extends Extension
         $config = $this->processConfiguration($configuration, $configs);
 
         $this->loadLocaleProvider($config, $container);
+        $this->loadRequireStrictRegions($config, $container);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
@@ -50,5 +51,14 @@ class MarkupAddressingExtension extends Extension
         }
         $overridesProvider = $container->getDefinition('markup_addressing.country_regex_override_provider');
         $overridesProvider->addMethodCall('setOverrideRegexes', array($config['country_postal_code_regex_overrides']));
+    }
+
+    /**
+     * @param array            $config
+     * @param ContainerBuilder $container
+     */
+    private function loadRequireStrictRegions(array $config, ContainerBuilder $container)
+    {
+        $container->setParameter('markup_addressing.require_strict_regions', $config['require_strict_regions']);
     }
 }
