@@ -50,3 +50,5 @@ This would echo out an address, formatted correctly according to the country, us
 ## License
 
 Released under the MIT License. See LICENSE.
+
+[![Build Status](https://api.travis-ci.org/usemarkup/AddressingBundle.png?branch=master)](http://travis-ci.org/usemarkup/AddressingBundle)
