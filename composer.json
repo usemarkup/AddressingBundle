@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "symfony/validator": "~2.3",
-        "phpunit/phpunit": "3.7.*",
+        "phpunit/phpunit": "4.*",
         "mockery/mockery": "~0.8.0"
     },
     "suggests": {
