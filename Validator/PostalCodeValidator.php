@@ -29,7 +29,7 @@ class PostalCodeValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         //check for accessor methods without dictating use of a specific interface
-        if (!is_object($value) or !method_exists($value, 'getCountry') or !method_exists($value, 'getPostalCode')) {
+        if (!is_object($value) or !method_exists($value, 'getCountry') || !method_exists($value, 'getPostalCode')) {
             throw new \InvalidArgumentException(sprintf('%s should be used for validating address objects with getCountry() and getPostalCode() methods.', __CLASS__));
         }
 
