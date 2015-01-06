@@ -9,7 +9,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class RegionConstraint extends Constraint
 {
-    public $message = 'The region name is invalid';
+    public $usMessage;
+    public $caMessage;
 
     public function validatedBy()
     {

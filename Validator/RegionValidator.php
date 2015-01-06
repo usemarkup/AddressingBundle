@@ -41,12 +41,12 @@ class RegionValidator extends ConstraintValidator
         switch ($value->getCountry()) {
             case 'US':
                 if (!$this->getGeography()->isUsStateAbbreviation($value->getRegion())) {
-                    $this->context->addViolation('addressing.region.us.invalid');
+                    $this->context->addViolation((isset($constraint->usMessage)) ? $constraint->usMessage : 'addressing.region.us.invalid');
                 }
                 break;
             case 'CA':
                 if (!$this->getGeography()->isCanadianProvinceAbbreviation($value->getRegion())) {
-                    $this->context->addViolation('addressing.region.ca.invalid');
+                    $this->context->addViolation((isset($constraint->caMessage)) ? $constraint->caMessage : 'addressing.region.ca.invalid');
                 }
                 break;
             default:
