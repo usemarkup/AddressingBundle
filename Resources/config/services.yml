@@ -118,3 +118,9 @@ services:
             - { name: validator.constraint_validator, alias: multiple_regex }
     markup_addressing.country_regex_override_provider:
         class: Markup\AddressingBundle\Validator\CountryRegexOverrideProvider
+    markup_addressing.validator.region:
+        class: Markup\AddressingBundle\Validator\RegionValidator
+        arguments:
+            - %markup_addressing.require_strict_regions%
+        tags:
+            - { name: validator.constraint_validator, alias: addressing_region }

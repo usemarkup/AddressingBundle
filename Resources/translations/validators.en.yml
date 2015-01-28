@@ -1,0 +1,6 @@
+addressing:
+    region:
+        us:
+            invalid: "Please enter your state as a two letter abbreviation (e.g. New York as 'NY', California as 'CA')"
+        ca:
+            invalid: "Please enter your province as a two letter abbreviation (e.g. Ontario as 'ON', Quebec as 'QC')"

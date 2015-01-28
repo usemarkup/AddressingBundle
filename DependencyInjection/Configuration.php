@@ -30,6 +30,9 @@ class Configuration implements ConfigurationInterface
                     ->prototype('variable')
                     ->end()
                 ->end()
+                ->booleanNode('require_strict_regions')
+                    ->defaultFalse()
+                ->end()
             ->end();
 
         return $treeBuilder;
