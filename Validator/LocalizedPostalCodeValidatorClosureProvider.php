@@ -91,6 +91,10 @@ class LocalizedPostalCodeValidatorClosureProvider
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$/'), $message));
                 break;
 
+            case 'US':
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^[0-9]{5}$/', '/^[0-9]{5}\-[0-9]{4}$/'), $message));
+                break;
+
             default:
                 return null;
                 break;
