@@ -47,7 +47,7 @@ class LocalizedPostalCodeValidatorClosureProvider
                 $override = array($override);
             }
 
-            return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint($override), $message);
+            return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint($override, $message));
         }
 
         //otherwise just match against country
