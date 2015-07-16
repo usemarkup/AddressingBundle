@@ -84,7 +84,7 @@ services:
         arguments:
             - @markup_addressing.twig.provider
             - @markup_addressing.address.template.provider
-            - %locale%
+            - @markup_addressing.locale_provider
     markup_addressing.address.extension.public:
         class: Markup\Addressing\Twig\Extension\AddressExtension
         arguments:
