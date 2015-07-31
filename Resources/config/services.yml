@@ -61,7 +61,7 @@ services:
         class: Twig_Environment
         arguments:
             - @markup_addressing.twig.loader
-            - %markup_addressing.twig.options.internal%
+            - []
         calls:
             - [ addExtension, [ @markup_addressing.country_name.extension ] ]
         scope: prototype

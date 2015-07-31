@@ -12,8 +12,8 @@ class InternalTwigOptionsCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
-        //if we already have internal twig options we are making, return
-        if ($container->hasParameter('markup_addressing.twig.options.internal')) {
+        $internalTwigId = 'markup_addressing.twig.internal';
+        if (!$container->hasDefinition($internalTwigId)) {
             return;
         }
 
@@ -22,8 +22,9 @@ class InternalTwigOptionsCompilerPass implements CompilerPassInterface
             return;
         }
 
+        $internalTwig = $container->getDefinition($internalTwigId);
         //make internal twig options using inherited twig options but with auto_reload env option set to true
         $twigOptions = $container->getParameter('twig.options');
-        $container->setParameter('markup_addressing.twig.options.internal', array_merge($twigOptions, array('auto_reload' => true)));
+        $internalTwig->replaceArgument(1, array_merge($twigOptions, ['auto_reload' => true]));
     }
 }
