@@ -3,124 +3,124 @@ parameters:
 
 services:
     markup_addressing.country_name.provider:
-        class: Markup\Addressing\Provider\CountryNameProvider
+        class: 'Markup\Addressing\Provider\CountryNameProvider'
         arguments:
-            - @markup_addressing.locale_provider
+            - '@markup_addressing.locale_provider'
     markup_addressing.locale_provider.default:
-        class: Markup\Addressing\Provider\LocaleProvider
+        class: 'Markup\Addressing\Provider\LocaleProvider'
         arguments:
-            - %locale%
+            - '%locale%'
     markup_addressing.country_name.extension:
-        class: Markup\Addressing\Twig\Extension\CountryNameExtension
+        class: 'Markup\Addressing\Twig\Extension\CountryNameExtension'
         arguments:
-            - @markup_addressing.country_name.provider
+            - '@markup_addressing.country_name.provider'
         tags:
             - { name: twig.extension }
     markup_addressing.address.node.provider.schemadotorghtml:
-        class: Markup\Addressing\Twig\Node\SchemaDotOrgAdrHtmlNodeProvider
+        class: 'Markup\Addressing\Twig\Node\SchemaDotOrgAdrHtmlNodeProvider'
         tags:
             - { name: markup_addressing.address_node_provider, alias: html }
     markup_addressing.address.node.provider.plaintext:
-        class: Markup\Addressing\Twig\Node\PlainTextNodeProvider
+        class: 'Markup\Addressing\Twig\Node\PlainTextNodeProvider'
         tags:
             - { name: markup_addressing.address_node_provider, alias: plaintext }
     markup_addressing.address.node.provider.comma_separated:
-        class: Markup\Addressing\Twig\Node\CommaSeparatedNodeProvider
+        class: 'Markup\Addressing\Twig\Node\CommaSeparatedNodeProvider'
         tags:
             - { name: markup_addressing.address_node_provider, alias: comma_separated }
     markup_addressing.address.factory.node.provider:
-        class: Markup\Addressing\Twig\Node\ProviderFactory
+        class: 'Markup\Addressing\Twig\Node\ProviderFactory'
     markup_addressing.address.extension.internal.html:
-        class: Markup\Addressing\Twig\Extension\InternalAddressExtension
+        class: 'Markup\Addressing\Twig\Extension\InternalAddressExtension'
         arguments:
-            - @markup_addressing.address.factory.node.provider
+            - '@markup_addressing.address.factory.node.provider'
             - html
         tags:
             - { name: markup_addressing.address_format_extension, alias: html }
     markup_addressing.address.extension.internal.plaintext:
-        class: Markup\Addressing\Twig\Extension\InternalAddressExtension
+        class: 'Markup\Addressing\Twig\Extension\InternalAddressExtension'
         arguments:
-            - @markup_addressing.address.factory.node.provider
+            - '@markup_addressing.address.factory.node.provider'
             - plaintext
         tags:
             - { name: markup_addressing.address_format_extension, alias: plaintext }
     markup_addressing.address.extension.internal.comma_separated:
-        class: Markup\Addressing\Twig\Extension\InternalAddressExtension
+        class: 'Markup\Addressing\Twig\Extension\InternalAddressExtension'
         arguments:
-            - @markup_addressing.address.factory.node.provider
+            - '@markup_addressing.address.factory.node.provider'
             - comma_separated
         tags:
             - { name: markup_addressing.address_format_extension, alias: comma_separated }
     markup_addressing.provider.address.extension.internal:
-        class: Markup\Addressing\Twig\Extension\InternalExtensionProvider
+        class: 'Markup\Addressing\Twig\Extension\InternalExtensionProvider'
     markup_addressing.twig.loader:
-        class: Markup\Addressing\Twig\Loader\TemplateLoader
+        class: 'Markup\Addressing\Twig\Loader\TemplateLoader'
         arguments:
-            - %markup_addressing.twig.delimiter.template_name%
+            - '%markup_addressing.twig.delimiter.template_name%'
     markup_addressing.twig.internal:
         class: Twig_Environment
         arguments:
-            - @markup_addressing.twig.loader
+            - '@markup_addressing.twig.loader'
             - []
         calls:
-            - [ addExtension, [ @markup_addressing.country_name.extension ] ]
+            - [ addExtension, [ '@markup_addressing.country_name.extension' ] ]
         scope: prototype
     markup_addressing.twig.provider:
-        class: Markup\Addressing\Provider\KeyedEnvironmentServiceProvider
+        class: 'Markup\Addressing\Provider\KeyedEnvironmentServiceProvider'
         arguments:
-            - @markup_addressing.twig.internal.closure
+            - '@markup_addressing.twig.internal.closure'
     markup_addressing.twig.internal.closure:
-        class: Markup\AddressingBundle\DependencyInjection\ServiceClosure
+        class: 'Markup\AddressingBundle\DependencyInjection\ServiceClosure'
         arguments:
             - markup_addressing.twig.internal
-            - @service_container
+            - '@service_container'
     markup_addressing.address.template.provider:
-        class: Markup\Addressing\Provider\IntlAddressTemplateProvider
+        class: 'Markup\Addressing\Provider\IntlAddressTemplateProvider'
         arguments:
-            - @markup_addressing.provider.address.extension.internal
-            - %markup_addressing.twig.delimiter.template_name%
+            - '@markup_addressing.provider.address.extension.internal'
+            - '%markup_addressing.twig.delimiter.template_name%'
     markup_addressing.address.renderer:
-        class: Markup\Addressing\Renderer\AddressRenderer
+        class: 'Markup\Addressing\Renderer\AddressRenderer'
         arguments:
-            - @markup_addressing.twig.provider
-            - @markup_addressing.address.template.provider
-            - @markup_addressing.locale_provider
+            - '@markup_addressing.twig.provider'
+            - '@markup_addressing.address.template.provider'
+            - '@markup_addressing.locale_provider'
     markup_addressing.address.extension.public:
-        class: Markup\Addressing\Twig\Extension\AddressExtension
+        class: 'Markup\Addressing\Twig\Extension\AddressExtension'
         arguments:
-            - @markup_addressing.address.renderer
+            - '@markup_addressing.address.renderer'
         tags:
             - { name: twig.extension }
     markup_addressing.canonicalizer.postal_code:
-        class: Markup\Addressing\Canonicalizer\PostalCodeCanonicalizer
+        class: 'Markup\Addressing\Canonicalizer\PostalCodeCanonicalizer'
     markup_addressing.validator.postal_code:
-        class: Markup\AddressingBundle\Validator\PostalCodeValidator
+        class: 'Markup\AddressingBundle\Validator\PostalCodeValidator'
         arguments:
-            - @markup_addressing.validator.postal_code.provider
+            - '@markup_addressing.validator.postal_code.provider'
         tags:
             - { name: validator.constraint_validator, alias: postal_code }
     markup_addressing.validator.postal_code.regex:
-        class: Markup\AddressingBundle\Validator\RegexPostalCodeValidator
+        class: 'Markup\AddressingBundle\Validator\RegexPostalCodeValidator'
         tags:
             - { name: validator.constraint_validator, alias: regex_postal_code }
     markup_addressing.validator.postal_code.provider:
-        class: Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider
+        class: 'Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider'
         arguments:
-            - @validator.validator_factory
-            - @markup_addressing.country_regex_override_provider
+            - '@validator.validator_factory'
+            - '@markup_addressing.country_regex_override_provider'
     markup_addressing.validator.fixed_length_digit:
-        class: Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeValidator
+        class: 'Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeValidator'
         tags:
             - { name: validator.constraint_validator, alias: fixed_length_digit_postal_code }
     markup_addressing.validator.multiple_regex:
-        class: Markup\AddressingBundle\Validator\MultipleRegexValidator
+        class: 'Markup\AddressingBundle\Validator\MultipleRegexValidator'
         tags:
             - { name: validator.constraint_validator, alias: multiple_regex }
     markup_addressing.country_regex_override_provider:
-        class: Markup\AddressingBundle\Validator\CountryRegexOverrideProvider
+        class: 'Markup\AddressingBundle\Validator\CountryRegexOverrideProvider'
     markup_addressing.validator.region:
-        class: Markup\AddressingBundle\Validator\RegionValidator
+        class: 'Markup\AddressingBundle\Validator\RegionValidator'
         arguments:
-            - %markup_addressing.require_strict_regions%
+            - '%markup_addressing.require_strict_regions%'
         tags:
             - { name: validator.constraint_validator, alias: addressing_region }
