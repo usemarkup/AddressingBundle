@@ -64,7 +64,6 @@ services:
             - []
         calls:
             - [ addExtension, [ '@markup_addressing.country_name.extension' ] ]
-        scope: prototype
     markup_addressing.twig.provider:
         class: 'Markup\Addressing\Provider\KeyedEnvironmentServiceProvider'
         arguments:

@@ -4,8 +4,10 @@ namespace Markup\AddressingBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -28,6 +30,7 @@ class MarkupAddressingExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        $this->setSharedServices($container);
         $this->loadCountryPostalCodeOverrides($config, $container);
     }
 
@@ -60,5 +63,19 @@ class MarkupAddressingExtension extends Extension
     private function loadRequireStrictRegions(array $config, ContainerBuilder $container)
     {
         $container->setParameter('markup_addressing.require_strict_regions', $config['require_strict_regions']);
+    }
+
+    private function setSharedServices(ContainerBuilder $container)
+    {
+        $sharedServiceIds = ['markup_addressing.twig.internal'];
+        $isLegacy = version_compare(Kernel::VERSION, '2.8', '<');
+        foreach ($sharedServiceIds as $sharedServiceId) {
+            $definition = $container->getDefinition($sharedServiceId);
+            if (!$isLegacy) {
+                $definition->setShared(true);
+            } else {
+                $definition->setScope(ContainerInterface::SCOPE_PROTOTYPE, false);
+            }
+        }
     }
 }
