@@ -30,7 +30,7 @@ class MarkupAddressingExtension extends Extension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        $this->setSharedServices($container);
+        $this->setNonSharedServices($container);
         $this->loadCountryPostalCodeOverrides($config, $container);
     }
 
@@ -65,14 +65,14 @@ class MarkupAddressingExtension extends Extension
         $container->setParameter('markup_addressing.require_strict_regions', $config['require_strict_regions']);
     }
 
-    private function setSharedServices(ContainerBuilder $container)
+    private function setNonSharedServices(ContainerBuilder $container)
     {
         $sharedServiceIds = ['markup_addressing.twig.internal'];
         $isLegacy = version_compare(Kernel::VERSION, '2.8', '<');
         foreach ($sharedServiceIds as $sharedServiceId) {
             $definition = $container->getDefinition($sharedServiceId);
             if (!$isLegacy) {
-                $definition->setShared(true);
+                $definition->setShared(false);
             } else {
                 $definition->setScope(ContainerInterface::SCOPE_PROTOTYPE, false);
             }
