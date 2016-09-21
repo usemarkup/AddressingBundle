@@ -5,6 +5,8 @@ namespace Markup\AddressingBundle\Tests\Validator;
 use Markup\AddressingBundle\Validator\RegionConstraint;
 use Markup\AddressingBundle\Validator\RegionValidator;
 use Mockery as m;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class RegionValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +14,7 @@ class RegionValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->useStrictRegions = true;
         $this->validator = new RegionValidator($this->useStrictRegions);
-        $this->context = m::mock('Symfony\Component\Validator\ExecutionContextInterface');
+        $this->context = m::mock(ExecutionContextInterface::class);
         $this->validator->initialize($this->context);
     }
 
@@ -23,7 +25,7 @@ class RegionValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function testIsValidator()
     {
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidatorInterface', $this->validator);
+        $this->assertInstanceOf(ConstraintValidatorInterface::class, $this->validator);
     }
 
     public function testThrowInvalidArgumentExceptionWhenInvalid()

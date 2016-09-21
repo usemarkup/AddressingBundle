@@ -4,19 +4,21 @@ namespace Markup\AddressingBundle\Tests\Validator;
 
 use Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeConstraint;
 use Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeValidator;
+use Symfony\Component\Validator\ConstraintValidator;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class FixedLengthDigitPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
         $this->validator = new FixedLengthDigitPostalCodeValidator();
-        $this->context = $this->getMock('Symfony\Component\Validator\ExecutionContextInterface');
+        $this->context = $this->getMock(ExecutionContextInterface::class);
         $this->validator->initialize($this->context);
     }
 
     public function testIsConstraintValidator()
     {
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidator', $this->validator);
+        $this->assertInstanceOf(ConstraintValidator::class, $this->validator);
     }
 
     public function testValidationWithoutLengthThrowsLogicException()
