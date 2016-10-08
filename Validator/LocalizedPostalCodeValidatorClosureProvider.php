@@ -62,7 +62,6 @@ class LocalizedPostalCodeValidatorClosureProvider
                 }
 
                 return $this->createValidatorClosureForConstraint($constraint);
-                break;
 
             case 'SE':
                 $constraint = new SwedenPostalCodeConstraint();
@@ -71,13 +70,11 @@ class LocalizedPostalCodeValidatorClosureProvider
                 }
 
                 return $this->createValidatorClosureForConstraint($constraint);
-                break;
 
             case 'DK':
             case 'BE':
             case 'NO';
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(4, $message));
-                break;
 
             case 'ES':
             case 'FI':
@@ -85,31 +82,24 @@ class LocalizedPostalCodeValidatorClosureProvider
             case 'FR':
             case 'DE':
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5, $message));
-                break;
 
             case 'NL':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}\s[A-Z]{2}$/'), $message));
-                break;
 
             case 'PL':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{2}\-\d{3}$/'), $message));
-                break;
 
             case 'PT':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}\-\d{3}$/'), $message));
-                break;
 
             case 'CA':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$/'), $message));
-                break;
 
             case 'US':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^[0-9]{5}$/', '/^[0-9]{5}\-[0-9]{4}$/'), $message));
-                break;
 
             default:
                 return null;
-                break;
         }
     }
 
