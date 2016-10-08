@@ -24,7 +24,7 @@ class RegisterAddressFormatExtensionsPass implements CompilerPassInterface
                 if (!isset($attributes['alias'])) {
                     continue;
                 }
-                $provider->addMethodCall('registerExtension', array($attributes['alias'], new Reference($id)));
+                $provider->addMethodCall('registerExtension', [$attributes['alias'], new Reference($id)]);
             }
         }
     }

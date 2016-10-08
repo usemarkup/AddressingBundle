@@ -30,7 +30,7 @@ class MultipleRegexValidatorTest extends \PHPUnit_Framework_TestCase
     public function testPassingPostalCode()
     {
         $postalCode = '123-456';
-        $patterns = array('/^\d{3}\-\d{3}$/', '/^\d{5}$/');
+        $patterns = ['/^\d{3}\-\d{3}$/', '/^\d{5}$/'];
         $constraint = new MultipleRegexConstraint();
         $constraint->patterns = $patterns;
         $this->context
@@ -42,7 +42,7 @@ class MultipleRegexValidatorTest extends \PHPUnit_Framework_TestCase
     public function testFailingPostalCode()
     {
         $postalCode = '123';
-        $patterns = array('/^[A-Z]{4}$/');
+        $patterns = ['/^[A-Z]{4}$/'];
         $constraint = new MultipleRegexConstraint();
         $constraint->patterns = $patterns;
         $this->context

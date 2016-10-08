@@ -24,7 +24,7 @@ class RegisterAddressNodeProvidersPass implements CompilerPassInterface
                 if (!isset($attributes['alias'])) {
                     continue;
                 }
-                $fac->addMethodCall('registerProvider', array($attributes['alias'], new Reference($id)));
+                $fac->addMethodCall('registerProvider', [$attributes['alias'], new Reference($id)]);
             }
         }
     }

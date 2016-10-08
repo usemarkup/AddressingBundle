@@ -54,13 +54,13 @@ class RegionValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function cases()
     {
-        return array(
-            array('FR', 'Île de France', true),
-            array('US', 'NY', true),
-            array('US', 'New York', false),
-            array('CA', 'ON', true),
-            array('US', 'Ontario', false),
-        );
+        return [
+            ['FR', 'Île de France', true],
+            ['US', 'NY', true],
+            ['US', 'New York', false],
+            ['CA', 'ON', true],
+            ['US', 'Ontario', false],
+        ];
     }
 
     public function testNonAbbreviationsPassWhenNotStrict()

@@ -53,7 +53,7 @@ class MarkupAddressingExtension extends Extension
             return;
         }
         $overridesProvider = $container->getDefinition('markup_addressing.country_regex_override_provider');
-        $overridesProvider->addMethodCall('setOverrideRegexes', array($config['country_postal_code_regex_overrides']));
+        $overridesProvider->addMethodCall('setOverrideRegexes', [$config['country_postal_code_regex_overrides']]);
     }
 
     /**

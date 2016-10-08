@@ -17,7 +17,7 @@ class CountryRegexOverrideProvider
     /**
      * @param array $overrideRegexes
      */
-    public function __construct(array $overrideRegexes = array())
+    public function __construct(array $overrideRegexes = [])
     {
         $this->setOverrideRegexes($overrideRegexes);
     }
@@ -39,7 +39,7 @@ class CountryRegexOverrideProvider
      * @param array $overrideRegexes
      * @return self
      */
-    public function setOverrideRegexes(array $overrideRegexes = array())
+    public function setOverrideRegexes(array $overrideRegexes = [])
     {
         $this->overrideRegexes = $overrideRegexes;
 

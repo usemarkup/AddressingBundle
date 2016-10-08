@@ -8,7 +8,7 @@ class CountryRegexOverrideProviderTest extends \PHPUnit_Framework_TestCase
 {
     protected function setUp()
     {
-        $this->overrides = array('IT' => '/^\d{5}$/');
+        $this->overrides = ['IT' => '/^\d{5}$/'];
         $this->provider = new CountryRegexOverrideProvider($this->overrides);
     }
 

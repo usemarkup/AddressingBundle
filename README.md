@@ -21,10 +21,10 @@ Add MarkupAddressingBundle to your AppKernel.php:
 ```php
     public function registerBundles()
     {
-        $bundles = array(
+        $bundles = [
             ...
             new Markup\AddressingBundle\MarkupAddressingBundle(),
-        );
+        ];
         ...
     }
 ```
@@ -42,7 +42,7 @@ Simple usage example:
 ```php
     $renderer = $this->get('markup_addressing.address.renderer');
     $address = new MyAddressAdapter($myAddress); //MyAddressAdapter here wraps a different address definition and makes it implement Markup\Addressing\AddressInterface
-    echo $renderer->render($address, array('format' => 'plaintext'));
+    echo $renderer->render($address, ['format' => 'plaintext']);
 ```
 
 This would echo out an address, formatted correctly according to the country, using plaintext.

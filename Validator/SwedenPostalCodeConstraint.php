@@ -15,7 +15,7 @@ class SwedenPostalCodeConstraint extends RegexConstraint
     public function getRequiredOptions()
     {
         //override requirement of a pattern option
-        return array();
+        return [];
     }
 
     public function validatedBy()

@@ -44,7 +44,7 @@ class LocalizedPostalCodeValidatorClosureProvider
         $override = $this->countryRegexOverrideProvider->getOverrideFor($country);
         if ($override) {
             if (!is_array($override)) {
-                $override = array($override);
+                $override = [$override];
             }
 
             return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint($override, $message));
@@ -84,19 +84,19 @@ class LocalizedPostalCodeValidatorClosureProvider
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5, $message));
 
             case 'NL':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}\s[A-Z]{2}$/'), $message));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^\d{4}\s[A-Z]{2}$/'], $message));
 
             case 'PL':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{2}\-\d{3}$/'), $message));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^\d{2}\-\d{3}$/'], $message));
 
             case 'PT':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^\d{4}\-\d{3}$/'), $message));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^\d{4}\-\d{3}$/'], $message));
 
             case 'CA':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$/'), $message));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^[A-Z][0-9][A-Z] [0-9][A-Z][0-9]$/'], $message));
 
             case 'US':
-                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(array('/^[0-9]{5}$/', '/^[0-9]{5}\-[0-9]{4}$/'), $message));
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^[0-9]{5}$/', '/^[0-9]{5}\-[0-9]{4}$/'], $message));
 
             default:
                 return null;

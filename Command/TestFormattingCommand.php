@@ -62,7 +62,7 @@ class TestFormattingCommand extends ContainerAwareCommand
         );
 
         $renderer = $this->getContainer()->get('markup_addressing.address.renderer');
-        $renderedLines = explode("\n", $renderer->render($address, array('format' => 'plaintext')));
+        $renderedLines = explode("\n", $renderer->render($address, ['format' => 'plaintext']));
 
         $output->writeln('<info>Formatted address:</info>');
         foreach ($renderedLines as $line) {
