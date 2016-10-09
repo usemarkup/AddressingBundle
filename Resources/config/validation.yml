@@ -1,0 +1,7 @@
+Markup\AddressingBundle\Checker\AddressUnderCheck:
+    properties:
+        country:
+            - Regex:
+                pattern: '/[A-Z]{2}/'
+    constraints:
+        - Markup\AddressingBundle\Validator\PostalCodeValidator: ~

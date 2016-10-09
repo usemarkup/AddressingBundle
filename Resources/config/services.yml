@@ -123,3 +123,7 @@ services:
             - '%markup_addressing.require_strict_regions%'
         tags:
             - { name: validator.constraint_validator, alias: addressing_region }
+    markup_addressing.postal_code_checker:
+        class: 'Markup\AddressingBundle\Checker\PostalCodeChecker'
+        arguments:
+            - '@validator'
