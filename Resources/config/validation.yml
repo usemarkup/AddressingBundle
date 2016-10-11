@@ -4,4 +4,4 @@ Markup\AddressingBundle\Checker\AddressUnderCheck:
             - Regex:
                 pattern: '/[A-Z]{2}/'
     constraints:
-        - Markup\AddressingBundle\Validator\PostalCodeValidator: ~
+        - Markup\AddressingBundle\Validator\PostalCodeConstraint: ~
