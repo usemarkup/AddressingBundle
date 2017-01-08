@@ -14,8 +14,6 @@ class MarkupAddressingBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new InternalTwigOptionsCompilerPass());
         $container->addCompilerPass(new RegisterAddressFormatExtensionsPass());
-        $container->addCompilerPass(new RegisterAddressNodeProvidersPass());
     }
 }
