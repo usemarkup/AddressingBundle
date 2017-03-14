@@ -15,8 +15,8 @@ class RegexPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->regexValidator = $this->getMock(ConstraintValidatorInterface::class);
-        $this->notBlankValidator = $this->getMock(ConstraintValidatorInterface::class);
+        $this->regexValidator = $this->createMock(ConstraintValidatorInterface::class);
+        $this->notBlankValidator = $this->createMock(ConstraintValidatorInterface::class);
         $this->validator = new RegexPostalCodeValidator($this->regexValidator, $this->notBlankValidator);
     }
 
@@ -29,7 +29,7 @@ class RegexPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $constraint = new PostalCodeConstraint();
         $constraint->message = 'message';
-        $context = $this->getMock(ExecutionContextInterface::class);
+        $context = $this->createMock(ExecutionContextInterface::class);
         $value = 'i am a value';
         $this->regexValidator
             ->expects($this->at(0))
