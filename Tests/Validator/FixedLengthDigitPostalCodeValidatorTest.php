@@ -12,7 +12,7 @@ class FixedLengthDigitPostalCodeValidatorTest extends \PHPUnit_Framework_TestCas
     protected function setUp()
     {
         $this->validator = new FixedLengthDigitPostalCodeValidator();
-        $this->context = $this->getMock(ExecutionContextInterface::class);
+        $this->context = $this->createMock(ExecutionContextInterface::class);
         $this->validator->initialize($this->context);
     }
 
