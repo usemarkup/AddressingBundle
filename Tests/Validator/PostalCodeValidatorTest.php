@@ -2,7 +2,10 @@
 
 namespace Markup\AddressingBundle\Tests\Validator;
 
+use Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider;
 use Markup\AddressingBundle\Validator\PostalCodeValidator;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\ConstraintValidatorInterface;
 
 /**
 * A test for a postal code validator that can perform localized postal code validation where available.
@@ -11,24 +14,20 @@ class PostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->validatorProvider = $this->getMockBuilder('Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->validatorProvider = $this->createMock(LocalizedPostalCodeValidatorClosureProvider::class);
         $this->validator = new PostalCodeValidator($this->validatorProvider);
     }
 
     public function testIsValidator()
     {
-        $this->assertInstanceOf('Symfony\Component\Validator\ConstraintValidatorInterface', $this->validator);
+        $this->assertInstanceOf(ConstraintValidatorInterface::class, $this->validator);
     }
 
     public function testPassingNonObjectThrowsInvalidArgumentException()
     {
-        $constraint = $this->getMockBuilder('Symfony\Component\Validator\Constraint')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $constraint = $this->createMock(Constraint::class);
         $value = 'POSTCODE';
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException(\InvalidArgumentException::class);
         $this->validator->validate($value, $constraint);
     }
 }

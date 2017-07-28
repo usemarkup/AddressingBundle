@@ -23,7 +23,7 @@ class FixedLengthDigitPostalCodeValidatorTest extends \PHPUnit_Framework_TestCas
 
     public function testValidationWithoutLengthThrowsLogicException()
     {
-        $this->setExpectedException('LogicException');
+        $this->expectException(\LogicException::class);
         $value = '12345';
         $constraint = new FixedLengthDigitPostalCodeConstraint();
         $this->validator->validate($value, $constraint);
