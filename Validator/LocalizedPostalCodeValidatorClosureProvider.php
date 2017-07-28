@@ -71,9 +71,8 @@ class LocalizedPostalCodeValidatorClosureProvider
 
                 return $this->createValidatorClosureForConstraint($constraint);
 
-            case 'DK':
             case 'BE':
-            case 'NO';
+            case 'NO':
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(4, $message));
 
             case 'ES':
@@ -82,6 +81,9 @@ class LocalizedPostalCodeValidatorClosureProvider
             case 'FR':
             case 'DE':
                 return $this->createValidatorClosureForConstraint($this->getFixedLengthDigitConstraint(5, $message));
+
+            case 'DK':
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^[1-9]\d{3}$/'], $message));
 
             case 'NL':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^\d{4}\s[A-Z]{2}$/'], $message));
