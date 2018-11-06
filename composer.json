@@ -29,9 +29,8 @@
         "symfony/validator": "~2.7|~3.0"
     },
     "autoload": {
-        "psr-0": { "Markup\\AddressingBundle": "" }
+        "psr-4": { "Markup\\AddressingBundle\\": "" }
     },
-    "target-dir": "Markup/AddressingBundle",
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
