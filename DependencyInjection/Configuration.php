@@ -17,8 +17,10 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('markup_addressing');
+        $treeBuilder = new TreeBuilder('markup_addressing');
+        $rootNode = (method_exists(TreeBuilder::class, 'getRootNode'))
+            ? $treeBuilder->getRootNode()
+            : $treeBuilder->root('markup_addressing');
 
         $rootNode
             ->addDefaultsIfNotSet()

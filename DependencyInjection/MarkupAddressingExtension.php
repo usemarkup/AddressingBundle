@@ -2,12 +2,11 @@
 
 namespace Markup\AddressingBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Markup\Addressing\Provider\LocaleProvider;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -39,7 +38,7 @@ class MarkupAddressingExtension extends Extension
      */
     private function loadLocaleProvider(array $config, ContainerBuilder $container)
     {
-        $container->setAlias('markup_addressing.locale_provider', $config['locale_provider']);
+        $container->setAlias(LocaleProvider::class, $config['locale_provider']);
     }
 
     /**
