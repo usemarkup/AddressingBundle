@@ -2,32 +2,45 @@ parameters:
     markup_addressing.twig.delimiter.template_name: '#'
 
 services:
-    markup_addressing.country_name.provider:
-        class: 'Markup\Addressing\Provider\CountryNameProvider'
+    _defaults:
+        public: false
+        autowire: false
+        autoconfigure: false
+
+    Markup\Addressing\Renderer\AddressRenderer:
         arguments:
-            - '@markup_addressing.locale_provider'
-    markup_addressing.locale_provider.default:
-        class: 'Markup\Addressing\Provider\LocaleProvider'
+            - '@markup_addressing.handlebars.template.provider'
+            - '@markup_addressing.country_name.provider'
+            - '@Markup\Addressing\Provider\LocaleProvider'
+        public: true
+    markup_addressing.address.renderer: '@Markup\Addressing\Renderer\AddressRenderer'
+    Markup\Addressing\Renderer\AddressRendererInterface: '@Markup\Addressing\Renderer\AddressRenderer'
+    Markup\Addressing\Provider\CountryNameProvider:
         arguments:
-            - '%locale%'
+            - '@Markup\Addressing\Provider\LocaleProvider'
+        public: true
+    markup_addressing.country_name.provider: '@Markup\Addressing\Provider\CountryNameProvider'
+    Markup\Addressing\Provider\CountryNameProviderInterface: '@Markup\Addressing\Provider\CountryNameProvider'
+    Markup\AddressingBundle\Checker\PostalCodeChecker:
+        arguments:
+            - '@validator'
+        public: true
+    markup_addressing.postal_code_checker: '@Markup\AddressingBundle\Checker\PostalCodeChecker'
     markup_addressing.country_name.extension:
         class: 'Markup\Addressing\Twig\Extension\CountryNameExtension'
         arguments:
             - '@markup_addressing.country_name.provider'
         tags:
             - { name: twig.extension }
-    markup_addressing.address.renderer:
-        class: 'Markup\Addressing\Renderer\AddressRenderer'
+    markup_addressing.locale_provider.default:
+        class: 'Markup\Addressing\Provider\LocaleProvider'
         arguments:
-            - '@markup_addressing.handlebars.template.provider'
-            - '@markup_addressing.country_name.provider'
-            - '@markup_addressing.locale_provider'
+            - '%locale%'
     markup_addressing.handlebars.template.provider:
         class: 'Markup\Addressing\Provider\IntlAddressHandlebarsTemplateProvider'
         arguments:
             - ['be', 'ca', 'dk', 'fi', 'gb', 'gg', 'ie', 'im', 'je', 'nl', 'no', 'se', 'us', 'jp']
             - '%kernel.cache_dir%/addressing'
-        public: false
     markup_addressing.canonicalizer.postal_code:
         class: 'Markup\Addressing\Canonicalizer\PostalCodeCanonicalizer'
     markup_addressing.validator.postal_code:
@@ -61,7 +74,8 @@ services:
             - '%markup_addressing.require_strict_regions%'
         tags:
             - { name: validator.constraint_validator, alias: addressing_region }
-    markup_addressing.postal_code_checker:
-        class: 'Markup\AddressingBundle\Checker\PostalCodeChecker'
-        arguments:
-            - '@validator'
+
+    Markup\AddressingBundle\Command\:
+        resource: '../../Command/*'
+        autowire: true
+        autoconfigure: true

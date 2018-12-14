@@ -3,7 +3,8 @@
 namespace Markup\AddressingBundle\Command;
 
 use Markup\Addressing\Address;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Markup\Addressing\Renderer\AddressRendererInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -11,13 +12,24 @@ use Symfony\Component\Console\Question\Question;
 /**
  * A console command that allows entering an address in order to see how it will be formatted.
  */
-class TestFormattingCommand extends ContainerAwareCommand
+class TestFormattingCommand extends Command
 {
+    protected static $defaultName = 'addressing:format:test';
+
+    /**
+     * @var AddressRendererInterface
+     */
+    private $addressRenderer;
+
+    public function __construct(AddressRendererInterface $addressRenderer)
+    {
+        $this->addressRenderer = $addressRenderer;
+        parent::__construct();
+    }
+
     protected function configure()
     {
-        $this
-            ->setName('addressing:format:test')
-            ->setDescription('Allows entering an address to see how it will be formatted.');
+        $this->setDescription('Allows entering an address to see how it will be formatted.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -61,8 +73,10 @@ class TestFormattingCommand extends ContainerAwareCommand
             $region ?: null
         );
 
-        $renderer = $this->getContainer()->get('markup_addressing.address.renderer');
-        $renderedLines = explode("\n", $renderer->render($address, ['format' => 'plaintext']));
+        $renderedLines = explode(
+            "\n",
+            $this->addressRenderer->render($address, ['format' => 'plaintext'])
+        );
 
         $output->writeln('<info>Formatted address:</info>');
         foreach ($renderedLines as $line) {

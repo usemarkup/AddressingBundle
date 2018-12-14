@@ -2,7 +2,7 @@
 
 ## About
 
-This Symfony2 bundle provides integration with the markup/addressing package, which is able to format addresses according to the rules set out in [Frank's Compulsive Guide To Postal Addresses](http://www.columbia.edu/~fdc/postal/).
+This Symfony bundle provides integration with the markup/addressing package, which is able to format addresses according to the rules set out in [Frank's Compulsive Guide To Postal Addresses](http://www.columbia.edu/~fdc/postal/).
 
 ## Installation
 

@@ -11,6 +11,21 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class RegionValidatorTest extends MockeryTestCase
 {
+    /**
+     * @var bool
+     */
+    private $useStrictRegions;
+
+    /**
+     * @var ExecutionContextInterface|m\MockInterface
+     */
+    private $context;
+
+    /**
+     * @var RegionValidator
+     */
+    private $validator;
+
     protected function setUp()
     {
         $this->useStrictRegions = true;
