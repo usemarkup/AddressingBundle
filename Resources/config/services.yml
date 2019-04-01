@@ -25,7 +25,7 @@ services:
     markup_addressing.handlebars.template.provider:
         class: 'Markup\Addressing\Provider\IntlAddressHandlebarsTemplateProvider'
         arguments:
-            - ['be', 'ca', 'dk', 'fi', 'gb', 'gg', 'ie', 'im', 'je', 'nl', 'no', 'se', 'us']
+            - ['be', 'ca', 'dk', 'fi', 'gb', 'gg', 'ie', 'im', 'je', 'nl', 'no', 'se', 'us', 'jp']
             - '%kernel.cache_dir%/addressing'
         public: false
     markup_addressing.canonicalizer.postal_code:
