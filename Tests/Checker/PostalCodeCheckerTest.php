@@ -5,11 +5,12 @@ namespace Markup\AddressingBundle\Tests\Checker;
 use Markup\AddressingBundle\Checker\AddressUnderCheck;
 use Markup\AddressingBundle\Checker\PostalCodeChecker;
 use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class PostalCodeCheckerTest extends \PHPUnit_Framework_TestCase
+class PostalCodeCheckerTest extends MockeryTestCase
 {
     /**
      * @var ValidatorInterface
@@ -25,11 +26,6 @@ class PostalCodeCheckerTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator = m::mock(ValidatorInterface::class);
         $this->checker = new PostalCodeChecker($this->validator);
-    }
-
-    protected function tearDown()
-    {
-        m::close();
     }
 
     public function testPostalCodeCheckerTrueIfValidates()

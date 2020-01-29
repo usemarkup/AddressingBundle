@@ -3,12 +3,13 @@
 namespace Markup\AddressingBundle\Tests\Validator;
 
 use Markup\AddressingBundle\Validator\PostalCodeConstraint;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraint;
 
 /**
 * A test for a class-based validator for postal codes that applies validation on a per-country basis.
 */
-class PostalCodeConstraintTest extends \PHPUnit_Framework_TestCase
+class PostalCodeConstraintTest extends TestCase
 {
     /**
      * @var PostalCodeConstraint

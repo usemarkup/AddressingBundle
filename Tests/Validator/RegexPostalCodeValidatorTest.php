@@ -4,6 +4,7 @@ namespace Markup\AddressingBundle\Tests\Validator;
 
 use Markup\AddressingBundle\Validator\PostalCodeConstraint;
 use Markup\AddressingBundle\Validator\RegexPostalCodeValidator;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -11,9 +12,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
 * A test for a validator for postal codes.
 */
-class RegexPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
+class RegexPostalCodeValidatorTest extends TestCase
 {
-    public function setUp()
+    protected function setUp()
     {
         $this->regexValidator = $this->createMock(ConstraintValidatorInterface::class);
         $this->notBlankValidator = $this->createMock(ConstraintValidatorInterface::class);

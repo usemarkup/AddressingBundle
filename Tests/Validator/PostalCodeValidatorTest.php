@@ -4,13 +4,14 @@ namespace Markup\AddressingBundle\Tests\Validator;
 
 use Markup\AddressingBundle\Validator\LocalizedPostalCodeValidatorClosureProvider;
 use Markup\AddressingBundle\Validator\PostalCodeValidator;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 
 /**
 * A test for a postal code validator that can perform localized postal code validation where available.
 */
-class PostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
+class PostalCodeValidatorTest extends TestCase
 {
     public function setUp()
     {

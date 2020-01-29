@@ -3,8 +3,9 @@
 namespace Markup\AddressingBundle\Tests\Validator;
 
 use Markup\AddressingBundle\Validator\CountryRegexOverrideProvider;
+use PHPUnit\Framework\TestCase;
 
-class CountryRegexOverrideProviderTest extends \PHPUnit_Framework_TestCase
+class CountryRegexOverrideProviderTest extends TestCase
 {
     protected function setUp()
     {
