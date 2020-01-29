@@ -4,10 +4,11 @@ namespace Markup\AddressingBundle\Tests\Validator;
 
 use Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeConstraint;
 use Markup\AddressingBundle\Validator\FixedLengthDigitPostalCodeValidator;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class FixedLengthDigitPostalCodeValidatorTest extends \PHPUnit_Framework_TestCase
+class FixedLengthDigitPostalCodeValidatorTest extends TestCase
 {
     protected function setUp()
     {

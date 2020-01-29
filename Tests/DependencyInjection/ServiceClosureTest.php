@@ -4,22 +4,34 @@ namespace Markup\AddressingBundle\Tests\DependencyInjection;
 
 use Markup\AddressingBundle\DependencyInjection\ServiceClosure;
 use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * A test for a callable object that returns a service (lazily fetched).
  */
-class ServiceClosureTest extends \PHPUnit_Framework_TestCase
+class ServiceClosureTest extends MockeryTestCase
 {
+    /**
+     * @var string
+     */
+    private $serviceId;
+
+    /**
+     * @var ContainerInterface|m\MockInterface
+     */
+    private $container;
+
+    /**
+     * @var ServiceClosure
+     */
+    private $closure;
+
     protected function setUp()
     {
         $this->serviceId = 'yay_service';
-        $this->container = m::mock('Symfony\Component\DependencyInjection\ContainerInterface');
+        $this->container = m::mock(ContainerInterface::class);
         $this->closure = new ServiceClosure($this->serviceId, $this->container);
-    }
-
-    protected function tearDown()
-    {
-        m::close();
     }
 
     public function testIsCallable()

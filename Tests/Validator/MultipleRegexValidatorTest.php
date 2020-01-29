@@ -5,21 +5,17 @@ namespace Markup\AddressingBundle\Tests\Validator;
 use Markup\AddressingBundle\Validator\MultipleRegexConstraint;
 use Markup\AddressingBundle\Validator\MultipleRegexValidator;
 use Mockery as m;
+use Mockery\Adapter\Phpunit\MockeryTestCase;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class MultipleRegexValidatorTest extends \PHPUnit_Framework_TestCase
+class MultipleRegexValidatorTest extends MockeryTestCase
 {
     protected function setUp()
     {
         $this->validator = new MultipleRegexValidator();
         $this->context = m::mock(ExecutionContextInterface::class);
         $this->validator->initialize($this->context);
-    }
-
-    protected function tearDown()
-    {
-        m::close();
     }
 
     public function testIsConstraintValidator()
