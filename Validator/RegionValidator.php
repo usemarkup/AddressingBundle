@@ -14,7 +14,7 @@ class RegionValidator extends ConstraintValidator
     private $useStrictRegion;
 
     /**
-     * @param $useStrictRegion
+     * @param bool $useStrictRegion
      */
     public function __construct($useStrictRegion = false)
     {

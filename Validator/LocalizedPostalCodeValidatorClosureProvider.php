@@ -20,10 +20,6 @@ class LocalizedPostalCodeValidatorClosureProvider
      */
     private $countryRegexOverrideProvider;
 
-    /**
-     * @param ConstraintValidatorFactoryInterface $validatorFactory
-     * @param CountryRegexOverrideProvider        $countryRegexForOverrideProvider
-     **/
     public function __construct(ConstraintValidatorFactoryInterface $validatorFactory, CountryRegexOverrideProvider $countryRegexOverrideProvider)
     {
         $this->validatorFactory = $validatorFactory;
