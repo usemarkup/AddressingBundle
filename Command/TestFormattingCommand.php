@@ -32,7 +32,7 @@ class TestFormattingCommand extends Command
         $this->setDescription('Allows entering an address to see how it will be formatted.');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $questionHelper = $this->getHelper('question');
         $ask = function (Question $question) use ($input, $output, $questionHelper) {
@@ -82,5 +82,7 @@ class TestFormattingCommand extends Command
         foreach ($renderedLines as $line) {
             $output->writeln($line);
         }
+
+        return 0;
     }
 }
