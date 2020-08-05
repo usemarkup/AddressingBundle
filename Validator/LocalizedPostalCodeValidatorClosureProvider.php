@@ -96,6 +96,13 @@ class LocalizedPostalCodeValidatorClosureProvider
             case 'US':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^[0-9]{5}$/', '/^[0-9]{5}\-[0-9]{4}$/'], $message));
 
+            case 'IE':
+                $constraint = new IrelandPostcodeConstraint();
+                if ($message) {
+                    $constraint->message = $message;
+                }
+
+                return $this->createValidatorClosureForConstraint($constraint);
             default:
                 return null;
         }
