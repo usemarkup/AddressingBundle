@@ -96,6 +96,8 @@ class LocalizedPostalCodeValidatorClosureProvider
             case 'US':
                 return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^[0-9]{5}$/', '/^[0-9]{5}\-[0-9]{4}$/'], $message));
 
+            case 'IE':
+                return $this->createValidatorClosureForConstraint($this->getMultipleRegexConstraint(['/^([AC-FHKNPRTV-Y]\d{2}|D6W) [0-9AC-FHKNPRTV-Y]{4}/'], $message));;
             default:
                 return null;
         }
