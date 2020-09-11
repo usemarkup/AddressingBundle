@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "markup/addressing": "^0.6",
+        "markup/addressing": "^0.7",
         "symfony/framework-bundle": "^3.4|^4|^5"
     },
     "require-dev": {
