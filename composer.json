@@ -36,11 +36,5 @@
         "branch-alias": {
             "dev-master": "1.0-dev"
         }
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/usemarkup/addressing.git"
-        }
-    ]
+    }
 }
